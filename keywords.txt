@@ -1,0 +1,6 @@
+Wiegand	KEYWORD1
+Setup   KEYWORD2
+Read	KEYWORD2
+IsTagValid	KEYWORD2
+ReaderOne	KEYWORD2
+ReaderZero	KEYWORD2
