@@ -12,6 +12,12 @@ volatile long Reader = 0;
 // int ReaderCount
 volatile int ReaderCount = 0;
 
+// valid site codes
+int _ValidSiteCodes[];
+
+// valid serial numbers
+int _ValidSerialNumbers[];
+
 /**
  * Wiegand init
  *
@@ -24,8 +30,8 @@ Wiegand::Wiegand(int Data0, int Data1, int ValidSiteCodes[], int ValidSerialNumb
 	_Data1 = Data1;
 
 	// Set valid numbers
-	ValidSiteCodes[] = ValidSiteCodes;
-	ValidSerialNumbers[] = ValidSerialNumbers;
+	_ValidSiteCodes[] = ValidSiteCodes;
+	_ValidSerialNumbers[] = ValidSerialNumbers;
 }
 
 /**
@@ -91,22 +97,28 @@ bool Wiegand::Read()
  * @param int
  * @return bool
  */
-bool Wiegand::IsTagValid(int siteCode, int serialNumber)
+bool Wiegand::IsTagValid(int SiteCode, int SerialNumber)
 {
-	boolean valid = false;
+	// set valid flag
+	bool Valid = false;
 
-	int validTagCount = sizeof(validSiteCodes) / sizeof(int);
+	// count valids from array
+	int ValidTagCount = sizeof(_ValidSiteCodes) / sizeof(int);
 
-	for (int t = 0; t < validTagCount; t++)
+	// loop through array
+	for (int t = 0; t < ValidTagCount; t++)
 	{
-		if (validSiteCodes[t] == siteCode && validSerialNumbers[t] == serialNumber)
+		// check if sitecode and serialnumber is in array
+		if (_ValidSiteCodes[t] == SiteCode && _ValidSerialNumbers[t] == SerialNumber)
 		{
-			valid = true;
+			// set flag true
+			Valid = true;
 			break;
 		}
-   }
+	}
 
-   return valid;
+	// return flag
+	return Valid;
 }
 
 /**
